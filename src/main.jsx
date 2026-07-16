@@ -9,14 +9,16 @@ const menu = {
   Desserts: [['Tiramisu', 'Classic Italian dessert with mascarpone', '$7.50'], ['Cheesecake', 'Creamy cheesecake with berry compote', '$7.00']],
   Beverages: [['Red Wine (Glass)', 'A selection of Italian reds', '$10.00'], ['White Wine (Glass)', 'Crisp and refreshing', '$9.00'], ['Craft Beer', 'Local artisan brews', '$6.00'], ['Espresso', 'Strong and aromatic', '$3.00']]
 };
+import homeImage from 'C:\Users\nicho\OneDrive\Documents\Quantic Project Cafe\images\home-cafe-fausse.webp';
+import interiorImage from 'C:\Users\nicho\OneDrive\Documents\Quantic Project Cafe\images\gallery-cafe-interior.webp';
+import steakImage from 'C:\Users\nicho\OneDrive\Documents\Quantic Project Cafe\images\gallery-ribeye-steak.webp';
+import specialEvent from 'C:\Users\nicho\OneDrive\Documents\Quantic Project Cafe\images\gallery-special-event.webp';
 const gallery = [
-  ['https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=85', 'The dining room'],
-  ['https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1200&q=85', 'Seasonal pasta'],
-  ['https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=85', 'Chef’s table'],
-  ['https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1200&q=85', 'An evening pour'],
-  ['https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1200&q=85', 'The bar'],
-  ['https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1200&q=85', 'Classic Italian flavors']
-];
+  [interiorImage, 'The dining room'],
+  [steakImage, 'Ribeye steak']
+  [homeImage, 'The Cafe']
+  [specialEvent,'The Event Space']];
+
 
 function Header({ page, setPage }) { return <header><button className="brand" onClick={() => setPage('home')}><span>Café</span> Fausse</button><nav>{['Menu','Reservations','About Us','Gallery'].map(x => <button className={page === x.toLowerCase().replace(' ','') ? 'active' : ''} onClick={() => setPage(x.toLowerCase().replace(' ',''))} key={x}>{x}</button>)}</nav><button className="reserve-top" onClick={() => setPage('reservations')}>Reserve a table</button></header> }
 function Intro({ eyebrow, title, copy }) { return <div className="intro"><p className="eyebrow">{eyebrow}</p><h1>{title}</h1>{copy && <p>{copy}</p>}</div> }
