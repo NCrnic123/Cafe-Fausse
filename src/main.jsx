@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
-import homeImage from '../images/home-cafe-fausse.webp';
-import interiorImage from '../images/gallery-cafe-interior.webp';
-import steakImage from '../images/gallery-ribeye-steak.webp';
-import specialEvent from '../images/gallery-special-event.webp';
+const homeImage = 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=85';
+const interiorImage = 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=85';
+const steakImage = 'https://images.unsplash.com/photo-1546964124-0cce460f38ef?auto=format&fit=crop&w=1200&q=85';
+const specialEvent = 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1200&q=85';
 const API = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 const menu = {
   Starters: [['Bruschetta', 'Fresh tomatoes, basil, olive oil, and toasted baguette slices', '$8.50'], ['Caesar Salad', 'Crisp romaine with homemade Caesar dressing', '$9.00']],
@@ -14,8 +14,8 @@ const menu = {
 };
 const gallery = [
   [interiorImage, 'The dining room'],
-  [steakImage, 'Ribeye steak']
-  [homeImage, 'The Cafe']
+  [steakImage, 'Ribeye steak'],
+  [homeImage, 'The Cafe'],
   [specialEvent,'The Event Space']];
 
 
@@ -26,6 +26,34 @@ function Menu() { return <main><Intro eyebrow="Our menu" title="Simple ingredien
 function Reservations() { const [message, setMessage] = useState(''); const [loading, setLoading] = useState(false); async function submit(e) { e.preventDefault(); setLoading(true); setMessage(''); const data=Object.fromEntries(new FormData(e.currentTarget)); try { const r=await fetch(`${API}/reservations`, {method:'POST', headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}); const body=await r.json(); if(!r.ok) throw new Error(body.error); setMessage(`Confirmed — your table ${body.table_number} awaits.`); e.currentTarget.reset(); } catch(err) { setMessage(err.message || 'Unable to complete your reservation. Please try again.'); } finally { setLoading(false); } } return <main className="reservation-page"><Intro eyebrow="Reservations" title="Make an evening of it." copy="Reservations are accepted up to 30 days in advance."/><form onSubmit={submit} className="reservation-form"><label>Date <input required name="date" type="date" min={new Date().toISOString().split('T')[0]}/></label><label>Time <select name="time" required defaultValue=""><option value="" disabled>Select a time</option>{['17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00'].map(x=><option key={x}>{x}</option>)}</select></label><label>Guests <select name="guests" required defaultValue=""><option value="" disabled>Number of guests</option>{[1,2,3,4,5,6,7,8].map(x=><option key={x}>{x}</option>)}</select></label><label>Your name <input required name="name" placeholder="Full name"/></label><label>Email address <input required name="email" type="email" placeholder="you@example.com"/></label><label>Phone <input name="phone" type="tel" placeholder="Optional"/></label><button className="gold-button" disabled={loading}>{loading ? 'Confirming…' : 'Confirm reservation'}</button>{message && <p className="form-message" role="status">{message}</p>}</form></main> }
 function About() { return <main><Intro eyebrow="Our story" title="Italian at heart. Washington by address."/><section className="about-story"><img src={gallery[2][0]} alt="Café Fausse kitchen"/><div><h2>Cooking with conviction since 2010.</h2><p>Founded by Chef Antonio Rossi and restaurateur Maria Lopez, Café Fausse blends traditional Italian flavors with modern culinary innovation. Our mission is to provide an unforgettable dining experience that reflects both quality and creativity.</p><p>We work with trusted local farmers and producers whenever possible, letting exceptional ingredients lead the conversation.</p></div></section><section className="founders"><article><p className="eyebrow">Chef & co-founder</p><h2>Antonio Rossi</h2><p>Antonio brings a lifelong respect for Italian technique and a restless curiosity for what comes next. His menus are rooted in memory, shaped by the season.</p></article><article><p className="eyebrow">Restaurateur & co-founder</p><h2>Maria Lopez</h2><p>Maria believes hospitality is an art form. She has built Café Fausse around a simple idea: every guest should leave feeling more cared for than when they arrived.</p></article></section></main> }
 function Gallery() { const [chosen,setChosen]=useState(null); return <main><Intro eyebrow="Gallery" title="A glimpse inside." copy="The light, the plates, the conversations—Café Fausse in its element."/><div className="gallery">{gallery.map(([src,alt],i)=><button key={src} onClick={()=>setChosen(i)}><img src={src} alt={alt}/><span>{alt}</span></button>)}</div><section className="recognition"><div><p className="eyebrow">Recognition</p><h2>Made with distinction.</h2><ul><li>Culinary Excellence Award — 2022</li><li>Restaurant of the Year — 2023</li><li>Best Fine Dining Experience — Foodie Magazine, 2023</li></ul></div><div className="quotes"><blockquote>“Exceptional ambiance and unforgettable flavors.”<cite>— Gourmet Review</cite></blockquote><blockquote>“A must-visit restaurant for food enthusiasts.”<cite>— The Daily Bite</cite></blockquote></div></section>{chosen !== null && <div className="lightbox" role="dialog" aria-modal="true" onClick={()=>setChosen(null)}><button aria-label="Close image">×</button><img src={gallery[chosen][0]} alt={gallery[chosen][1]}/></div>}</main> }
-function Footer() { const [message,setMessage]=useState(''); async function signup(e){e.preventDefault();const email=new FormData(e.currentTarget).get('email');try {const r=await fetch(`${API}/newsletter`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});if(!r.ok)throw Error();setMessage('Thank you for joining us.');e.currentTarget.reset()}catch{setMessage('Please try again shortly.')}} return <footer><div><button className="brand"><span>Café</span> Fausse</button><p>Fine Italian dining in Washington, DC.</p></div><div><p className="eyebrow">Notes from our table</p><form onSubmit={signup}><input required type="email" name="email" placeholder="Your email address" aria-label="Email address"/><button aria-label="Subscribe">→</button></form>{message&&<small>{message}</small>}</div><p className="copyright">© {new Date().getFullYear()} Café Fausse</p></footer> }
+function Footer() {
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  async function signup(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const email = new FormData(form).get('email');
+    setLoading(true);
+    setMessage('');
+    try {
+      const response = await fetch(`${API}/newsletter`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({email})
+      });
+      const body = await response.json();
+      if (!response.ok) throw new Error(body.error || 'Unable to subscribe right now.');
+      setMessage('Thank you for joining us.');
+      form.reset();
+    } catch (error) {
+      setMessage(error.message || 'Please try again shortly.');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return <footer><div><button className="brand"><span>Café</span> Fausse</button><p>Fine Italian dining in Washington, DC.</p></div><div><p className="eyebrow">Notes from our table</p><form onSubmit={signup}><input required type="email" name="email" placeholder="Your email address" aria-label="Email address" disabled={loading}/><button type="submit" aria-label="Subscribe" disabled={loading}>{loading ? '…' : '→'}</button></form>{message && <small role="status" aria-live="polite">{message}</small>}</div><p className="copyright">© {new Date().getFullYear()} Café Fausse</p></footer>;
+}
 function App() { const [page,setPage]=useState('home'); const views={home:<Home setPage={setPage}/>,menu:<Menu/>,reservations:<Reservations/>,aboutus:<About/>,gallery:<Gallery/>}; return <><Header page={page} setPage={setPage}/>{views[page]}<Footer/></> };
 createRoot(document.getElementById('root')).render(<App/>);
