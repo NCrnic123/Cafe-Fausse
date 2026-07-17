@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
-
+import homeImage from '../images/home-cafe-fausse.webp';
+import interiorImage from '../images/gallery-cafe-interior.webp';
+import steakImage from '../images/gallery-ribeye-steak.webp';
+import specialEvent from '../images/gallery-special-event.webp';
 const API = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 const menu = {
   Starters: [['Bruschetta', 'Fresh tomatoes, basil, olive oil, and toasted baguette slices', '$8.50'], ['Caesar Salad', 'Crisp romaine with homemade Caesar dressing', '$9.00']],
@@ -9,10 +12,6 @@ const menu = {
   Desserts: [['Tiramisu', 'Classic Italian dessert with mascarpone', '$7.50'], ['Cheesecake', 'Creamy cheesecake with berry compote', '$7.00']],
   Beverages: [['Red Wine (Glass)', 'A selection of Italian reds', '$10.00'], ['White Wine (Glass)', 'Crisp and refreshing', '$9.00'], ['Craft Beer', 'Local artisan brews', '$6.00'], ['Espresso', 'Strong and aromatic', '$3.00']]
 };
-import homeImage from 'C:\Users\nicho\OneDrive\Documents\Quantic Project Cafe\images\home-cafe-fausse.webp';
-import interiorImage from 'C:\Users\nicho\OneDrive\Documents\Quantic Project Cafe\images\gallery-cafe-interior.webp';
-import steakImage from 'C:\Users\nicho\OneDrive\Documents\Quantic Project Cafe\images\gallery-ribeye-steak.webp';
-import specialEvent from 'C:\Users\nicho\OneDrive\Documents\Quantic Project Cafe\images\gallery-special-event.webp';
 const gallery = [
   [interiorImage, 'The dining room'],
   [steakImage, 'Ribeye steak']
