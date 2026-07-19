@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
-const homeImage = 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=85';
-const interiorImage = 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=85';
-const steakImage = 'https://images.unsplash.com/photo-1546964124-0cce460f38ef?auto=format&fit=crop&w=1200&q=85';
-const specialEvent = 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1200&q=85';
+import homeImage from '../images/home-cafe-fausse.webp';
+import interiorImage from '../images/gallery-cafe-interior.webp';
+import steakImage from '../images/gallery-ribeye-steak.webp';
+import specialEvent from '../images/gallery-special-event.webp';
+import chef from '../images/chef.jpg';
+import entrance from '../images/entrance.jpg'
 const API = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 const menu = {
   Starters: [['Bruschetta', 'Fresh tomatoes, basil, olive oil, and toasted baguette slices', '$8.50'], ['Caesar Salad', 'Crisp romaine with homemade Caesar dressing', '$9.00']],
@@ -16,7 +18,11 @@ const gallery = [
   [interiorImage, 'The dining room'],
   [steakImage, 'Ribeye steak'],
   [homeImage, 'The Cafe'],
-  [specialEvent,'The Event Space']];
+  [specialEvent, 'The Event Space'],
+  [chef, 'Chef Antonio Rossi'],
+  [entrance, 'The Entrance']
+];
+
 
 
 function Header({ page, setPage }) { return <header><button className="brand" onClick={() => setPage('home')}><span>Café</span> Fausse</button><nav>{['Menu','Reservations','About Us','Gallery'].map(x => <button className={page === x.toLowerCase().replace(' ','') ? 'active' : ''} onClick={() => setPage(x.toLowerCase().replace(' ',''))} key={x}>{x}</button>)}</nav><button className="reserve-top" onClick={() => setPage('reservations')}>Reserve a table</button></header> }
