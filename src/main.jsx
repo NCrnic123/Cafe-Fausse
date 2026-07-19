@@ -24,7 +24,7 @@ const gallery = [
   [chef, 'Chef Antonio Rossi'],
   [entrance, 'The Entrance'],
   [bruschetta, 'Bruschetta'],
-  [salmon. 'Grilled Salmon']
+  [salmon, 'Grilled Salmon']
 ];
 
 
