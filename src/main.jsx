@@ -6,8 +6,9 @@ import interiorImage from '../images/gallery-cafe-interior.webp';
 import steakImage from '../images/gallery-ribeye-steak.webp';
 import specialEvent from '../images/gallery-special-event.webp';
 import chef from '../images/chef.jpg';
-import bruschetta from '../images/bruschetta.jpg;
-import entrance from '../images/entrance.jpg'
+import bruschetta from '../images/bruschetta.jpg';
+import entrance from '../images/entrance.jpg';
+import salmon from '../images/grilled-salmon';
 const API = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 const menu = {
   Starters: [['Bruschetta', 'Fresh tomatoes, basil, olive oil, and toasted baguette slices', '$8.50'], ['Caesar Salad', 'Crisp romaine with homemade Caesar dressing', '$9.00']],
@@ -22,7 +23,8 @@ const gallery = [
   [specialEvent, 'The Event Space'],
   [chef, 'Chef Antonio Rossi'],
   [entrance, 'The Entrance'],
-  [bruschetta, 'Bruschetta']
+  [bruschetta, 'Bruschetta'],
+  [salmon. 'Grilled Salmon']
 ];
 
 
