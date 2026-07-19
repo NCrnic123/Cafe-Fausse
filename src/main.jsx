@@ -6,6 +6,7 @@ import interiorImage from '../images/gallery-cafe-interior.webp';
 import steakImage from '../images/gallery-ribeye-steak.webp';
 import specialEvent from '../images/gallery-special-event.webp';
 import chef from '../images/chef.jpg';
+import bruschetta from '../images/bruschetta.jpg;
 import entrance from '../images/entrance.jpg'
 const API = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 const menu = {
@@ -20,7 +21,8 @@ const gallery = [
   [homeImage, 'The Cafe'],
   [specialEvent, 'The Event Space'],
   [chef, 'Chef Antonio Rossi'],
-  [entrance, 'The Entrance']
+  [entrance, 'The Entrance'],
+  [bruschetta, 'Bruschetta']
 ];
 
 
