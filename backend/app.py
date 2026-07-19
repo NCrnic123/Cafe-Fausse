@@ -43,12 +43,12 @@ def newsletter():
     with db_connection() as conn:
         cur = conn.cursor()
         placeholder = '%s' if DATABASE_URL else '?'
-        cur.execute(f'SELECT customer_id FROM customers WHERE email_address = {placeholder}', (email,))
+        cur.execute(f'SELECT customer_id FROM customers WHERE customer_email = {placeholder}', (email,))
         row = cur.fetchone()
         if row:
             cur.execute(f'UPDATE customers SET newsletter_signup = TRUE WHERE customer_id = {placeholder}', (row[0],))
         else:
-            cur.execute(f'INSERT INTO customers (email_address, newsletter_signup) VALUES ({placeholder}, TRUE)', (email,))
+            cur.execute(f'INSERT INTO customers (customer_email, newsletter_signup) VALUES ({placeholder}, TRUE)', (email,))
     return jsonify(message='Subscription saved.'), 201
 
 @app.post('/api/reservations')
@@ -71,11 +71,11 @@ def reserve():
         available = list(set(range(1, 31)) - used)
         if not available:
             return jsonify(error='That time is fully booked. Please choose another time.'), 409
-        cur.execute(f'SELECT customer_id FROM customers WHERE email_address = {p}', (data['email'].lower(),))
+        cur.execute(f'SELECT customer_id FROM customers WHERE customer_email = {p}', (data['email'].lower(),))
         row = cur.fetchone()
         if row: customer_id = row[0]
         else:
-            query = f'INSERT INTO customers (customer_name, email_address, phone_number) VALUES ({p}, {p}, {p})'
+            query = f'INSERT INTO customers (customer_name, customer_email, phone_number) VALUES ({p}, {p}, {p})'
             if DATABASE_URL:
                 cur.execute(query + ' RETURNING customer_id', (data['name'], data['email'].lower(), data.get('phone', '')))
                 customer_id = cur.fetchone()[0]
