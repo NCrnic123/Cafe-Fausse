@@ -5,8 +5,9 @@ import homeImage from '../images/home-cafe-fausse.webp';
 import interiorImage from '../images/gallery-cafe-interior.webp';
 import steakImage from '../images/gallery-ribeye-steak.webp';
 import specialEvent from '../images/gallery-special-event.webp';
-import specialEvent from '../images/chef.jpg';
-import specialEvent from '../images/entrance.jpg'
+import chef from '../images/chef.jpg';
+import entrance from '../images/entrance.jpg';
+import Lasagna from '../images/lasagna.jpg
 const API = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 const menu = {
   Starters: [['Bruschetta', 'Fresh tomatoes, basil, olive oil, and toasted baguette slices', '$8.50'], ['Caesar Salad', 'Crisp romaine with homemade Caesar dressing', '$9.00']],
